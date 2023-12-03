@@ -1,0 +1,379 @@
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" type="text/css" href="movies.css">
+  
+ 
+  <script src="script.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Netdot Sci-fi movie download</title>
+</head>
+<body>
+<p>Search for Sci-fi movies here</p>
+   <style>
+    #search-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    #results-container {
+        max-width: 400px;
+        margin: 20px auto;
+        text-align: center;
+        font-size: 50px;
+        font-family: fantasy;
+    }
+
+    .result-item {
+        margin-bottom: 10px;
+    }
+
+    .result-item img {
+        max-width: 90%;
+        height: auto;
+        margin-bottom: 5px;
+        border: solid 10px #ccc;
+    }
+
+    .result-item a {
+        text-decoration: none;
+        color: #333;
+    }
+
+    input {
+        width: 100%;
+        height: 30px;
+    }
+</style>
+
+<div id="search-container">
+    <input type="text" id="search-input" placeholder="Netdot Movie Search">
+</div>
+
+<div id="results-container">
+    <!-- Display search results here -->
+</div>
+
+<script>
+    const websiteData = [
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+        { title: " ", imageUrl: " ", link: ".html" },
+       
+    ];
+
+    const searchInput = document.getElementById("search-input");
+    const resultsContainer = document.getElementById("results-container");
+
+    searchInput.addEventListener("input", function () {
+        const searchTerm = searchInput.value.trim().toLowerCase();
+
+        if (searchTerm === "") {
+            resultsContainer.style.display = "none";
+        } else {
+            const searchResults = websiteData.filter(item =>
+                item.title.toLowerCase().includes(searchTerm)
+            );
+            displayResults(searchResults);
+        }
+    });
+
+    function displayResults(results) {
+        if (results.length > 0) {
+            resultsContainer.innerHTML = "";
+            results.forEach(result => {
+                const resultElement = document.createElement("div");
+                resultElement.classList.add("result-item");
+
+                if (result.imageUrl) {
+                    const imgElement = document.createElement("img");
+                    imgElement.src = result.imageUrl;
+                    resultElement.appendChild(imgElement);
+                }
+
+                const titleElement = document.createElement("p");
+                titleElement.innerHTML = `<a href="${result.link}" target="_blank">${result.title}</a>`;
+                resultElement.appendChild(titleElement);
+
+                resultsContainer.appendChild(resultElement);
+            });
+            resultsContainer.style.display = "block";
+        } else {
+            resultsContainer.innerHTML = "<p>No results found.</p>";
+            resultsContainer.style.display = "underline";
+        }
+    }
+</script>
+  <h1>Categories</h1>
+    <div class="test-container">
+    <div class="test"> <a href="Action movies.html"> Action</div></a>
+  <div class="test"><a href="Comedy movies.html">Comedy</div></a>
+  <div class="test"><a href="Crime movies.html">Crime</div></a>
+  <div class="test"><a href="Sci-fi movies.html">Sci-fi</div></a>
+</div><br>
+  
+  <div class="test-container">
+  <div class="test"><a href="Horror movies.html">Horror</div></a>
+  <div class="test"><a href="Thriller.html">Thriller</div></a>
+  <div class="test"><a href="Cartoon.html">Cartoon</div></a>
+  <div class="test"><a href="Latest.html">Latest</div></a>
+</div><br>
+<div class="test-container">
+  <div class="test"><a href="Adventure.html">Adventure</div></a>
+  <div class="test"><a href="Nollywood.html">Nollywood</div></a>
+  <div class="test"><a href="Bollywood.html">Bollywood</div></a>
+  <div class="test"><a href="series.html">series</div></a>
+  </div>
+
+  <h1 class="heading">Sci-fi Movies</h1>
+  
+
+  
+    <h1>Infinity Pool</h1>
+  <a href="pool.html">
+  <div class="creed">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTt5ys4-fGo4gbFSL12e59tzFaMEBVYJ_jrpw&usqp=CAU">
+    
+  </a>
+  </div>
+<h1>They Cloned Tyrone</h1><a href="clone.html">
+  <div class="Elemental">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREM6nilvOluu43xgEHAeosZBO1TXJvNX4bqQ&usqp=CAU">
+    
+  </div></a>
+  
+
+  <h1>Poor Things</h1>
+  <a href"poor.html">
+  <div class="Extraction">
+    <img src="https://m.media-amazon.com/images/M/MV5BNGIyYWMzNjktNDE3MC00YWQyLWEyMmEtN2ZmNzZhZDk3NGJlXkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_FMjpg_UX1000_.jpg">
+  </a>
+  </div>
+  
+    <h1>Fingernails</h1>
+  <a href="nails.html">
+  <div class="creed">
+    <img src="https://m.media-amazon.com/images/M/MV5BM2ZjZWUyMDUtNDNjMS00YzMzLWJiNjMtMDZhMzRiNmJjOTQ1XkEyXkFqcGdeQXVyMTAyMjQ3NzQ1._V1_FMjpg_UX1000_.jpg"
+  </a>
+  </div>
+<h1>Paradise</h1><a href="paradise.html">
+  <div class="Elemental">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyL5eHYoGjfIbIw-TC_s5bJsHBsXuDIIbYfA&usqp=CAU">
+    
+  </div></a>
+  
+    <h1>Foe</h1>
+  <div class="creed"><a href="foe.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsS_5OtxJ0Fn4NDbq67fCbBlcINTq5LqskDw&usqp=CAU">
+    
+    
+  </div></a>
+  
+  <h1>Robots</h1>
+  <a href="robots.html">
+  <div class="Extraction">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3BYSo04pnvPLEepc1IrWmCH0Fc5uzhJ_ehQ&usqp=CAU">
+  </a>
+  </div>
+  
+
+<h1>57 Seconds</h1><a href="seconds.html">
+  <div class="Elemental">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfWZRlHXMfVTgzxBw-Fwxviq2MFHsnldQXmw&usqp=CAU">
+    
+  </div></a>
+  
+
+  <h1>Simulant</h1>
+  <a href="simulant.html">
+  <div class="Extraction">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1qRFxY8dRZghkZap-VB_Soqs8vcffmkqS_A&usqp=CAU">
+  </a>
+  </div>
+  
+    <h1>Bird box:Barcelona</h1>
+  <a href="bird.html">
+  <div class="creed">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxitecwsOTCh77fr69ZYdRH07Uc4bIje3hyA&usqp=CAU">
+    
+  </a>
+  </div>
+<h1>War of the Worlds:The Attacks</h1><a href="war.html">
+  <div class="Elemental">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRXJ8EvZaFQ__yQoOSk66jHVkhsPor8Md2lA&usqp=CAU">
+    
+  </div></a>
+  
+    <h1>Maid Droid</h1>
+  <div class="creed"><a href="maid.html">
+    <img src="https://m.media-amazon.com/images/M/MV5BN2YwOTZiZTItNjRlMy00ZDlhLTliMWEtZDcyODFjNmVkMTNiXkEyXkFqcGdeQXVyMzM1MDM3MDA@._V1_FMjpg_UX1000_.jpg">
+    
+    
+  </div></a>
+  
+  <h1>Relax,i am  from the future </h1>
+  <a href="future.html">
+  <div class="Extraction">
+    <img src="https://m.media-amazon.com/images/M/MV5BZDE4NGZmMTMtODM4MS00ZTg3LWEzM2YtM2JkNmQxOGIyMjcxXkEyXkFqcGdeQXVyNzc0MTgzMzU@._V1_FMjpg_UX1000_.jpg">
+  </a>
+  </div>
+  
+    <h1>Aporia</h1>
+  <a href="aporia.html">
+  <div class="creed">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBVowMoI-3VJJd3FCn9ddUwffChY4nSKfBjA&usqp=CAU">
+    
+  </a>
+  </div>
+
+  
+    <h1>The Shift</h1>
+  <div class="creed"><a href="shift.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMhVJHrzrkT7AT_0R8t1rikjfMmRbxQMxQtw&usqp=CAU">
+    
+    
+  </div></a>
+  
+  
+
+
+    <h1>Restore Point</h1>
+  <div class="creed"><a href="point.html">
+    <img src="https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/168/010/168010993_u1wvq6.jpg">
+    
+    
+  </div></a>
+  
+
+    <h1>T.I.M</h1>
+  <a href="tim.html">
+  <div class="creed">
+    <img src="https://m.media-amazon.com/images/M/MV5BYmUxNWY3ZjgtNjUyOS00YzdlLTkxNmYtYTlhYzQ1YWVkZmRiXkEyXkFqcGdeQXVyMzUwNDIxMjQ@._V1_.jpg">
+    
+  </a>
+  </div>
+<h1>Monsters of Carlifonia</h1><a href="monster.html">
+  <div class="Elemental">
+    <img src="https://m.media-amazon.com/images/M/MV5BMTQ2MDg5YWYtNzYzZS00ZGJhLThlN2ItY2IzOTdkMGMzMDU2XkEyXkFqcGdeQXVyMjM4MTAwNzQ@._V1_FMjpg_UX1000_.jpg">
+  </div</a>
+  
+ 
+ 
