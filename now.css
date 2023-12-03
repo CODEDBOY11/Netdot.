@@ -1,0 +1,57 @@
+
+  #search-container {
+            text-align: center;
+            margin: 20px;
+    
+        }
+
+        #results-container {
+            max-width: 400px;
+            margin: 20px auto;
+            text-align: center;
+            font-size: 50px;
+            font-family: fantasy;
+        }
+   
+
+
+        .result-item {
+            margin-bottom: 10px;
+        }
+
+        .result-item img {
+            max-width: 90%;
+            height: auto;
+            margin-bottom: 5px;
+            border: solid 10px #ccc;
+        }
+
+
+        .result-item a {
+            text-decoration: none;
+            color: #333;
+        }
+  
+  
+  #movies-link,
+    #news-link,
+    #music-link {
+        text-decoration: none;
+        color: #0070c9; /* Change the color to your desired color */
+        font-size: 20px; /* Change the font size to your desired size */
+        margin: 10px; /* Adjust the margin as needed */
+    }
+
+    #movies-link:hover,
+    #news-link:hover,
+    #music-link:hover {
+        color: #ff6600; /* Change the hover color to your desired color */
+   
+  
+  
+  
+
+        input {
+            width: 100%;
+            height: 30px;
+        }
