@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hello, World!</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+</head>
+<style>
+
+hr{
+  background-color:green;
+}
+
+ img {
+   height:40px;
+   width:40px;
+  
+ }
+
+.navbar {
+  float: left;
+  width: 90%;
+  background-color: black;
+  overflow: auto;
+  position:fixed;
+  height:100%;
+}
+
+/* Navbar links */
+.navbar a {
+  text-align: left; /* Align the links to the left */
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+  display: block; /* Make the links block-level elements */
+}
+
+/* Navbar links on mouse-over */
+.navbar a:hover {
+  background-color: #BCC6CC;
+}
+
+/* Current/active navbar link */
+.active {
+  
+  background-color:#333;
+}
+
+/* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels */
+@media screen and (max-width: 500px) {
+  .navbar a {
+    float: none;
+  }
+}
+
+/* Style for icon images */
+.navbar i {
+  display: block; /* Make the icons block-level elements */
+  text-align: center; /* Center the icons */
+  margin-bottom: 5px; /* Add some spacing between icons and text */
+}
+.icon{
+  background-color:black;
+  color:white;
+}
+</style>
+<body>
+<!-- Add an image for hiding the navigation bar -->
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmQpYqRtKCd58vavLUuSj1v5uv459n_v8dwvP7MPqwL5NlHuYgeP4BBS8&s=10" alt="Icon" id="icon" class="icon" onclick="toggleNavbar()">
+
+ <div class="navbar" style="display: none;">
+     <a class="active" href="index.html">
+    <i class="fa fa-fw fa-home" style="float: left; margin-right:10px;"></i> <!-- Icon floated left -->
+    <span class="text">Home</span>
+  </a>
+<a class="active" href="Movies.html">
+  <i class="fa fa-film" style="float: left; margin-right: 10px;"></i> <!-- Movie Icon -->
+  <span class="text">Movie</span>
+</a>
+    
+    <a class="active" href="music.html">
+  <i class="fa fa-music" style="float: left; margin-right: 10px;"></i> <!-- Music Icon -->
+  <span class="text">Music</span>
+</a>
+    
+    <a class="active" href="news.html">
+  <i class="fa fa-newspaper-o" style="float: left; margin-right: 10px;"></i> <!-- News Icon -->
+  <span class="text">News</span>
+</a>
+    
+   
+   <hr>
+   <a class="active" href="https://api.whatsapp.com/send?phone=your-phone-number">
+  <i class="fa fa-whatsapp" style="float: left; margin-right: 10px;"></i> <!-- WhatsApp Icon -->
+  <span class="text">WhatsApp Page</span>
+</a>
+   <a class="active" href=" ">
+  <i class="fa fa-facebook" style="float: left; margin-right: 10px;"></i> <!-- Facebook Icon -->
+  <span class="text">Facebook Page</span>
+</a>
+   <a class="active" href="https://t.me/your-telegram-username">
+  <i class="fa fa-telegram" style="float: left; margin-right: 10px;"></i> <!-- Telegram Icon -->
+  <span class="text">Telegram Channel</span>
+</a>
+   <a class="active" href="https://www.instagram.com/your-channel-url">
+  <i class="fa fa-instagram" style="float: left; margin-right: 10px;"></i> <!-- Instagram Icon -->
+  <span class="text">Instagram Channel</span>
+</a>
+   <a class="active" href="https://twitter.com/your-twitter-handle">
+  <i class="fa fa-twitter" style="float: left; margin-right: 10px;"></i> <!-- Twitter Icon -->
+  <span class="text">Twitter Page</span>
+</a>
+   
+   <a class="active" href="https://www.youtube.com/your-channel-url">
+  <i class="fa fa-youtube-play" style="float: left; margin-right: 10px;"></i> <!-- YouTube Icon -->
+  <span class="text">YouTube Channel</span>
+</a>
+   
+  </div>
+
+  <script>
+    function toggleNavbar() {
+      var navbar = document.querySelector('.navbar');
+      if (navbar.style.display === 'none' || navbar.style.display === '') {
+        navbar.style.display = 'block';
+      } else {
+        navbar.style.display = 'none';
+      }
+    }
+  </script>
+  
+</body>
+</html>

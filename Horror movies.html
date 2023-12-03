@@ -1,0 +1,909 @@
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" type="text/css" href="movies.css">
+   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+ 
+  <script src="script.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Netdot Action movie download</title>
+</head>
+<body>
+<p>Search for Action movies here</p>
+   <style>
+    #search-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    #results-container {
+        max-width: 400px;
+        margin: 20px auto;
+        text-align: center;
+        font-size: 30px;
+        font-family: fantasy;
+    }
+
+    .result-item {
+        margin-bottom: 10px;
+    }
+
+    .result-item img {
+        max-width: 30%;
+        height: 50%;
+        margin-bottom: 5px;
+        border: solid 10px #ccc;
+    }
+
+    .result-item a {
+        text-decoration: none;
+        color: #333;
+    }
+
+    input {
+        width: 100%;
+        height: 30px;
+    }
+</style>
+
+<div id="search-container">
+    <input type="text" id="search-input" placeholder="Netdot Movie Search">
+</div>
+
+<div id="results-container">
+    <!-- Display search results here -->
+</div>
+
+<script>
+    const websiteData = [
+        { title: "Extraction", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9UHA0E9t7Lksocit0INptfyXPYh7PvVRUkQ&usqp=CAU", link: "Extraction.html" },
+        { title: "Extraction 2", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPQEWz3Usp5L5C9WFEuVc12nLNAHDerK8-4w&usqp=CAU", link: "Extraction 2.html" },
+        { title: "Jawan", imageUrl: "https://upload.wikimedia.org/wikipedia/en/3/39/Jawan_film_poster.jpg", link: "jawan.html" },
+        { title: "The Retribution", imageUrl: "https://upload.wikimedia.org/wikipedia/en/1/1f/Retribution_%282023%29_poster.jpeg?20230629013611", link: "the retribution.html" },
+        { title: "The Hunger Games:Ballad of Songbird and Snakes",imageUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaq3Db3Qo02MEAE2YcDcCOzer3RVzpv6V0SA&usqp=CAU", link: "hunger games.html" },
+        { title: "The Equaliser 3", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSPcVzlXa-Hb1rVYslhcxeVSOgEPCU33-Wiw&usqp=CAU", link: "the equalizer 3.html" },
+        { title: "The Creator", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9FZ4X2C66Fjv05H626i9w--ZQCAZ6F4p4gw&usqp=CAU", link: "the creator.html" },
+        { title: "India Jones:The dial of destiny", imageUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmzVL_6hUHj9n_SU5k0DYcGK0YHJ9gv0kKow&usqp=CAU", link: "india.html" },
+        { title: "Sound of Freedom", imageUrl: "https://m.media-amazon.com/images/M/MV5BNTAwNWQ1ZjQtZDFmMC00YjNlLWFlNjItMjJlYzZkMjJlNzkyXkEyXkFqcGdeQXVyNzc0MTgzMzU@._V1_FMjpg_UX1000_.jpg", link: "sound.html" },
+        { title: "The Toxic Avenger", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhrlO4dWZNZPsDYtR7H8Jkpj364864v8uUBw&usqp=CAU", link: "the toxic avenger.html" },
+        { title: "Gran Turismo", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0Tzw74isYcIuLbTvuIXKIfLt4Sg6gnkmuKg&usqp=CAU", link: "gran turismo.html" },
+        { title: "The Retribution", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFdwIqR3e8TNELBved5rVtJ3gXfeS9Brbw3Q&usqp=CAU", link: "the killer.html" },
+        { title: "The Equalizer", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQddhSMnhLLS0Ms1dX-unOd63iBotLfRoVwbQ&usqp=CAU", link: "the equalizer.html" },
+        { title: "Jailer", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRK5yMTAddSJNzPVv2_zmTGdZDcJLH8WuofWg&usqp=CAU", link: "jailer.html" },
+        { title: "Spy Kids:Armageddon", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwVcY9S3tMp8FzIR_4xJUana7_6a-o0FlYnA&usqp=CAU", link: "spy kids.html" },
+        { title: "The Expandables", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRT6TlvwnwqAWlM2tv0I2N_lUFvGVbLoMMXOw&usqp=CAU", link: "the expandables.html" },
+        { title: "The Expandables 3 ", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTayC5PaRGZxBfy-LsgTZeuVjwjNRZVWG1mQ&usqp=CAU", link: "the expandables 3.html" },
+        { title: "The Retirement Plan", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ2AYA2YO0YXD_HOw2rmqWEvEDzDhm_34pcA&usqp=CAU", link: "plan.html" },      
+        { title: "Logan Lucky", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQynkpacbycHNzAzWTDFxxsETgBiIhSiAx8Sw&usqp=CAU", link: "logan.html" },
+        { title: "Tenet", imageUrl: "https://m.media-amazon.com/images/M/MV5BMzU3YWYwNTQtZTdiMC00NjY5LTlmMTMtZDFlYTEyODBjMTk5XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg", link: "tenet.html" },
+        { title: "Bullet Train", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSafVlFRnl8_EUCrqtwhaVBwLwlYt_1CeBn4g&usqp=CAU", link: "bullet train.html" },
+        { title: "Hypnotic", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSN_89Twd34YtA5xLlqMN9__9vTJildBwTEw&usqp=CAU", link: "hypnotic.html" },
+        { title: "Hit man", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMVw2ZrQkfggfhRUYHsdAz90aqRXdpspErVg&usqp=CAU", link: "hit man.html" },
+        { title: "Carter", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzCpT4F30j6IG_u2gVhKF7p_xexfMpN0o-cA&usqp=CAU", link: "carter.html" },
+        { title: "RRR", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSq_upi6H5h0FhX12IZ1VJN2WttqTmwGDbEDA&usqp=CAU", link: "rrr.html" },
+        { title: "Blood and Gold", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiNgeqmGKcz1-zCjlcjzID77Pr-B7Pp8ba8w&usqp=CAU", link: "blood.html" },
+        { title: "Army of Thieves", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmqxlipq6EZ3culOqeR_TL6UDEBGTgSqTt7A&usqp=CAU", link: "army.html" },
+        { title: "Overhaul", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjFzSbGqaBWZ2F4kHGjtykNUHkGbspHZXmeg&usqp=CAU", link: "overhaul.html" },
+        { title: "A Day and a Half", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsFctWQ3z2vU2HDyD4WlAnr9xUdTCCVMkjHg&usqp=CAU", link: "day.html" },
+        { title: "Takkar", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQL-SS8x1et30lP96_a_dwwSn983lKWZm2vCA&usqp=CAU", link: "takkar.html" },
+        { title: "Creed |||", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpKScCxsCBNOxz5DCSJ-zOe3nVINv-4jxFHw&usqp=CAU", link: "creed 3.html" },
+        { title: "Knight of the Zodiac", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrzKJsVrH7eeOTEN_dPzJzoG_6mm0AZT62_w&usqp=CAU", link: "knight.html" },
+			       { title: "Creed ||", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvYhRa7Udg_4q6phiJ3lqgXJzeSinnY9YK7w&usqp=CAU", link: "Creed.html" },
+        { title: "Meg 2", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj7cfwZYXV1EA39l3O6u_-Nbu4MRWr-xQlgg&usqp=CAU", link: "meg 2.html" },
+        { title: "Bhoola", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEfGKI1Ryb3O7K1c2YiucyGK4W0O1oD0mVHw&usqp=CAU", link: "bhoola.html" },
+			       { title: "Snake eyes", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjSC0fGkVBWGKl7utQwQ2ZLM2ExLesa7U2Wg&usqp=CAU" , link: "snake eyes.html" },
+        { title: "Tripple Frontier", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrxpAOyl3IFLoraHty_t1jddnlSGFoGG466g&usqp=CAU" , link: "tripple frontier.html" },
+        { title: "The Tomorrow war", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVU2lAmRi20jxrPb1hTAMAMG73PoM0sfjS5w&usqp=CAU" , link: "tomorrow war.html" },
+			       { title: "Mad max", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRE0VjCNm3TsUiBUSjHCLnFvM78bNXvLxRARQ&usqp=CAU" , link: "mad max.html" },
+        { title: "Inception", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIJXCX_rJjQVDFizvx0gS4jbAQm35NGe-3Nw&usqp=CAU" , link: "inception.html" },
+        { title: "John wick", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0RqKHCd4l--DnNuhmkiFSAu1wzZcaeL_MFA&usqp=CAU" , link: "john wick.html" },
+			       { title: "John wick 2", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEJcneezR32yC6zcackktJCHT2ABYGszeJ6w&usqp=CAU" , link: "john wick 2.html" },
+        { title: "John wick 3", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNDTJ-qmkKX1TU7GxXzi0Wzr0AAPvu64GJ-A&usqp=CAU" , link: "john wick 3.html" },
+        { title: "John wick 4", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsEDRq8HEtys-rpNwb2r3a7Jbg-QHdYJ47HQ&usqp=CAU" , link: "john wick 4.html" },
+			       { title: "Terminator 2", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMYL7nehafFBISEYXtE4W3pLn1EEMJbqnA2Q&usqp=CAU" , link: "terminator 2.html" },
+        { title: "The matrix", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9hPApBmIPXVSDaP-IJaF3cLhzsci424R8yg&usqp=CAU" , link: "the matrix.html" },
+        { title: "Gladiator", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvrrK6ws6ea1l3z11KQYNqrp0Rf6g5Uagaiw&usqp=CAU" , link: "gladiator.html" },
+			       { title: "Die Hard", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbQlLbdx0acdeV3qTzWeV5RayySw4Ofhze_Q&usqp=CAU" , link: "die hard.html" },
+        { title: "Commando", imageUrl: "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p8739_v_v10_ai.jpg" , link: "commando.html" },
+        { title: "Hard Boiled", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj2j2vN9BB6oQ8NU5sK84i3nWnB-W3RRd5gg&usqp=CAU" , link: "hard boiled.html" },
+			       { title: "The Bourne Ultimatum", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVEIgtuFITT10u96Gy4ZzsDtjNPpQMu2Uo9w&usqp=CAU" , link: "the Bourne ultimatum.html" },
+        { title: "Robocop", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEd2tteo1wh-3Cfj8augSPsU8EzLfICGheOA&usqp=CAU" , link: "Robocop.html" },
+        { title: "Kill Bill", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwEoZ8Jc63HQlulh4JuDn3o-TtJEoocc9LGg&usqp=CAU" , link: "kill bill.html" },
+			       { title: "The Raid", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnpJl7UyJbhEYm9bst7fLQeIGNMaesrKUbMQ&usqp=CAU" , link: "the raid.html" },
+        { title: "Speed", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_ht0jWqoeW53vF_8HaOkS64sGx7lgPMaRYA&usqp=CAU" , link: "speed.html" },
+        { title: "The Dark Knight", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcJ4nmjnJZ2MyNeISmtAilLZNsDWfRwHNWdw&usqp=CAU" , link: "the dark knight.html" },
+			       { title: "Predator", imageUrl: " " , link: "predator.html" },
+        { title: "The Meg", imageUrl: " " , link: "the meg.html" },
+        { title: "Black Panther", imageUrl: " " , link: "black panther 2.html" },
+			       { title: "Avengers:Endgame", imageUrl: " " , link: "avengers.html" },
+        { title: "Aquaman", imageUrl: " " , link: "Aquaman.html" },
+        { title: "Jungle Cruise", imageUrl: " " , link: "jungle cruise.html" },
+			       { title: "Uncharted", imageUrl: " " , link: "Uncharted.html" },
+        { title: "No time to Die", imageUrl: " " , link: "no time to die.html" },
+        { title: "Dune", imageUrl: " " , link: "dune.html" },
+			       { title: "Free Guy", imageUrl: " " , link: "free guy.html" },
+        { title: "Northman", imageUrl: " " , link: "Northman.html" },
+        { title: "The Batman", imageUrl: " " , link: "the Batman.html" },
+			       { title: "The Lost City", imageUrl: " " , link: "the lost city.html" },
+        { title: "Secret Headquarters", imageUrl: " " , link: "secret HQ.html" },
+        { title: "Doctor Strange", imageUrl: " " , link: "doctor strange.html" },
+			       { title: "Black Panther", imageUrl: " " , link: "black panther.html" },
+        { title: "Woman King", imageUrl: " " , link: "woman king.html" },
+        { title: "Prey", imageUrl: " " , link: "prey.html" },
+			       { title: "Avatar", imageUrl: " " , link: "avatar.html" },
+        { title: "Black Adam", imageUrl: " " , link: "black adam.html" },
+        { title: "Shazam", imageUrl: " " , link: "shazam.html" },
+			       { title: "The Flash", imageUrl: " " , link: "the flash.html" },
+        { title: "Guardian of Galaxy", imageUrl: " " , link: "guardian of galaxy.html" },
+        { title: "Transformer", imageUrl: " " , link: "transformer.html" },
+			       { title: "Dungeons and Dragons", imageUrl: " " , link: "dungeons and dragon.html" },
+        { title: "Fast x", imageUrl: " " , link: "fast x.html" },
+        { title: "The Haunted mansion", imageUrl: " " , link: "the haunted mansion.html" },
+        { title: "Secret invasion", imageUrl: " " , link: "secret invasion.html" },
+			       { title: "Mission impossible", imageUrl: " " , link: "mission impossible.html" },
+        { title: "65", imageUrl: " " , link: "sixty five.html" },
+        { title: "the outlaws", imageUrl: " " , link: "the outlaws.html" },
+			       { title: "Expandables 4", imageUrl: " " , link: "expandables 4.html" },
+         { title: "The Collective", imageUrl: " " , link: "the collective.html" },
+        { title: "The Mother", imageUrl: " " , link: "the mother.html" },
+        { title: "Aka", imageUrl: " " , link: "Aka.html" },
+			       { title: "School for Good and Evil", imageUrl: " " , link: "school of good and evil.html" },
+        { title: "Operation Fortune", imageUrl: " " , link: "operation.html" },
+        { title: "Ram Setu", imageUrl: " " , link: "ram setu.html" },
+			       { title: "Enola holmes", imageUrl: " " , link: "Enola holmes.html" },
+        { title: "Chupa", imageUrl: " " , link: "chupa.html" },
+        { title: "Troll", imageUrl: " " , link: "troll.html" },
+			       { title: "The last kingdom", imageUrl: " " , link: "the last kingdom.html"},
+			       { title: "Spy", imageUrl: "" , link: "spy.html" },
+         { title: "Hidden Strike", imageUrl: "" , link: "hidden strike.html" },
+        { title: "Blue beetle", imageUrl: " " , link: "Blue beetle.html" },
+        { title: "Heart of Ston", imageUrl: " " , link: "heart of stone.html" },
+			       { title: " ", imageUrl: " " , link: "Antman.html" },
+        
+    ];
+
+    const searchInput = document.getElementById("search-input");
+    const resultsContainer = document.getElementById("results-container");
+
+    searchInput.addEventListener("input", function () {
+        const searchTerm = searchInput.value.trim().toLowerCase();
+
+        if (searchTerm === "") {
+            resultsContainer.style.display = "none";
+        } else {
+            const searchResults = websiteData.filter(item =>
+                item.title.toLowerCase().includes(searchTerm)
+            );
+            displayResults(searchResults);
+        }
+    });
+
+    function displayResults(results) {
+        if (results.length > 0) {
+            resultsContainer.innerHTML = "";
+            results.forEach(result => {
+                const resultElement = document.createElement("div");
+                resultElement.classList.add("result-item");
+
+                if (result.imageUrl) {
+                    const imgElement = document.createElement("img");
+                    imgElement.src = result.imageUrl;
+                    resultElement.appendChild(imgElement);
+                }
+
+                const titleElement = document.createElement("p");
+                titleElement.innerHTML = `<a href="${result.link}" target="_blank">${result.title}</a>`;
+                resultElement.appendChild(titleElement);
+
+                resultsContainer.appendChild(resultElement);
+            });
+            resultsContainer.style.display = "block";
+        } else {
+            resultsContainer.innerHTML = "<p>No results found.</p>";
+            resultsContainer.style.display = "underline";
+        }
+    }
+</script>
+  <h1>Categories</h1>
+  <div class="test-container">
+    <div class="test"> <a href="Action movies.html"> Action</div></a>
+  <div class="test"><a href="Comedy movies.html">Comedy</div></a>
+  <div class="test"><a href="Crime movies.html">Crime</div></a>
+  <div class="test"><a href="Sci-fi movies.html">Sci-fi</div></a>
+</div><br>
+  
+  <div class="test-container">
+  <div class="test"><a href="Horror movies.html">Horror</div></a>
+  <div class="test"><a href="Thriller.html">Thriller</div></a>
+  <div class="test"><a href="Cartoon.html">Cartoon</div></a>
+  <div class="test"><a href="Action movies.html">Latest</div></a>
+</div><br>
+<div class="test-container">
+  <div class="test"><a href="Yorba.html">Adventure</div></a>
+  <div class="test"><a href="Nollywood.html">Nollywood</div></a>
+  <div class="test"><a href="Bollywood.html">Bollywood</div></a>
+  <div class="test"><a href="series.html">Fantasy</div></a>
+  </div>
+
+  <h1 class="heading">Action movies</h1>
+  
+
+  
+    <h1>Jawan</h1>
+  <a href=" Jawan.html">
+  <div class="Elemental">
+    <img src="https://upload.wikimedia.org/wikipedia/en/3/39/Jawan_film_poster.jpg">
+    
+  </a>
+  </div>
+
+    <h1>The Retribution</h1>
+  <div class="creed"><a href="the retribution.html">
+    <img src="https://upload.wikimedia.org/wikipedia/en/1/1f/Retribution_%282023%29_poster.jpeg?20230629013611">
+    
+    
+  </div></a>
+  <h1>The Hunger games:Ballad of songbirds and snakes</h1>
+  <a href="hunger games.html">
+  <div class="Extraction">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaq3Db3Qo02MEAE2YcDcCOzer3RVzpv6V0SA&usqp=CAU">
+    
+  </a>
+  </div>
+  
+    <h1>
+      The Equalizer 3
+    </h1>
+  <a href="the equalizer 3.html">
+  <div class="Elemental">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSPcVzlXa-Hb1rVYslhcxeVSOgEPCU33-Wiw&usqp=CAU">
+    
+  </a>
+  </div>
+<h1>The Creator</h1><a href="the creator.html">
+  <div class="Elemental">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9FZ4X2C66Fjv05H626i9w--ZQCAZ6F4p4gw&usqp=CAU">
+    
+  </div></a>
+  
+
+  
+
+<h1>India Jones the Dial of Destiny</h1><a href="india.html">
+  <div class="Elemental">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmzVL_6hUHj9n_SU5k0DYcGK0YHJ9gv0kKow&usqp=CAU">
+    
+  </div></a>
+  
+    <h1>Sound of freedom</h1>
+  <div class="creed"><a href="sound.html">
+    <img src="https://m.media-amazon.com/images/M/MV5BNTAwNWQ1ZjQtZDFmMC00YjNlLWFlNjItMjJlYzZkMjJlNzkyXkEyXkFqcGdeQXVyNzc0MTgzMzU@._V1_FMjpg_UX1000_.jpg">
+    
+    
+  </div></a>
+  
+  
+
+  
+    <h1>Gran Turismo</h1>
+  <div class="creed"><a href="gran turismo.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0Tzw74isYcIuLbTvuIXKIfLt4Sg6gnkmuKg&usqp=CAU">
+    
+    
+  </div></a>
+  
+  <h1>The Killer</h1>
+  <a href="the killer.html">
+  <div class="Extraction">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFdwIqR3e8TNELBved5rVtJ3gXfeS9Brbw3Q&usqp=CAU">
+    
+  </a>
+  </div>
+  
+    <h1>The Equaliser</h1>
+  <a href="the equalizer.html">
+  <div class="creed">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQddhSMnhLLS0Ms1dX-unOd63iBotLfRoVwbQ&usqp=CAU">
+    
+  </a>
+  </div>
+<h1>Jailer</h1><a href="jailer.html">
+  <div class="Elemental">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRK5yMTAddSJNzPVv2_zmTGdZDcJLH8WuofWg&usqp=CAU">
+    
+  </div></a>
+  
+    
+  
+  <h1>Spy Kids:Armageddon</h1>
+  <a href="spy kids.html">
+  <div class="Extraction">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwVcY9S3tMp8FzIR_4xJUana7_6a-o0FlYnA&usqp=CAU">
+    
+  </a>
+  </div>
+  
+    <h1>The Expandables</h1>
+  <a href="the expandables.html">
+  <div class="creed">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRT6TlvwnwqAWlM2tv0I2N_lUFvGVbLoMMXOw&usqp=CAU">
+    
+  </a>
+  </div>
+<h1>The Expandables 3</h1><a href="the expandables 3.html">
+  <div class="Elemental">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTayC5PaRGZxBfy-LsgTZeuVjwjNRZVWG1mQ&usqp=CAU">
+    
+  </div></a>
+  
+    <h1>The Retirement Plan</h1>
+  <div class="creed"><a href="plan.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ2AYA2YO0YXD_HOw2rmqWEvEDzDhm_34pcA&usqp=CAU">
+    
+    
+  </div></a>
+  
+  <h1>Logan Lucky</h1>
+  <a href="logan.html">
+  <div class="Extraction">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQynkpacbycHNzAzWTDFxxsETgBiIhSiAx8Sw&usqp=CAU">
+    
+  </a>
+  </div>
+  
+    <h1>Tenet</h1>
+  <a href="tenet.html">
+  <div class="Elemental">
+    <img src="https://m.media-amazon.com/images/M/MV5BMzU3YWYwNTQtZTdiMC00NjY5LTlmMTMtZDFlYTEyODBjMTk5XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg">
+    
+  </a>
+  </div>
+<h1>Bullet train</h1><a href="bullet train.html">
+  <div class="Elemental">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSafVlFRnl8_EUCrqtwhaVBwLwlYt_1CeBn4g&usqp=CAU">
+    
+  </div></a>
+  
+    <h1>Hypnotic</h1>
+  <div class="creed"><a href="hypnotic.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSN_89Twd34YtA5xLlqMN9__9vTJildBwTEw&usqp=CAU">
+    
+    
+  </div></a>
+  
+  <h1>Hit man</h1>
+  <a href="hit man.html">
+  <div class="Extraction">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMVw2ZrQkfggfhRUYHsdAz90aqRXdpspErVg&usqp=CAU">
+    
+  </a>
+  </div>
+  
+    <h1>Carter</h1>
+  <a href="carter.html">
+  <div class="Elemental">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzCpT4F30j6IG_u2gVhKF7p_xexfMpN0o-cA&usqp=CAU">
+    
+  </a>
+  </div>
+<h1>RRR</h1><a href="rrr.html">
+  <div class="Elemental">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSq_upi6H5h0FhX12IZ1VJN2WttqTmwGDbEDA&usqp=CAU">
+    
+  </div></a>
+  
+    <h1>Blood and Gold</h1>
+  <div class="creed"><a href="blood.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiNgeqmGKcz1-zCjlcjzID77Pr-B7Pp8ba8w&usqp=CAU">
+    
+    
+  </div></a>
+  
+  <h1>Army of thieves</h1>
+  <a href="army.html">
+  <div class="Extraction">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmqxlipq6EZ3culOqeR_TL6UDEBGTgSqTt7A&usqp=CAU">
+    
+  </a>
+  </div>
+  
+    <h1>Overhaul</h1>
+  <a href="overhaul.html">
+  <div class="creed">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjFzSbGqaBWZ2F4kHGjtykNUHkGbspHZXmeg&usqp=CAU">
+    
+  </a>
+  </div>
+<h1>A Day and a Half</h1><a href="a day.html">
+  <div class="Elemental">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsFctWQ3z2vU2HDyD4WlAnr9xUdTCCVMkjHg&usqp=CAU">
+    
+  </div></a>
+  
+    <h1>Takkar</h1>
+  <div class="creed"><a href="takkar.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQL-SS8x1et30lP96_a_dwwSn983lKWZm2vCA&usqp=CAU">
+    
+    
+  </div></a>
+  
+  <h1>Creed |||</h1>
+  <a href="creed 3.html">
+  <div class="Extraction">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpKScCxsCBNOxz5DCSJ-zOe3nVINv-4jxFHw&usqp=CAU">
+    
+  </a>
+  </div>
+  <h1>Knight of the Zodiac</h1>
+  <a href="knight.html">
+  <div class="Extraction">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrzKJsVrH7eeOTEN_dPzJzoG_6mm0AZT62_w&usqp=CAU">
+    
+  </a>
+  </div>
+  
+    
+    
+  </div></a>
+  <h1>Extraction</h1>
+  <a href="Extraction.html">
+  <div class="Extraction">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9UHA0E9t7Lksocit0INptfyXPYh7PvVRUkQ&usqp=CAU">
+    
+  </a>
+  </div>
+  
+    <h1>Extraction 2</h1>
+  <a href="Extraction 2.html">
+  <div class="Extraction 2">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPQEWz3Usp5L5C9WFEuVc12nLNAHDerK8-4w&usqp=CAU">
+    
+  </a>
+  </div>
+
+  
+    <h1>Creed ||</h1>
+  <div class="creed"><a href="Creed.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvYhRa7Udg_4q6phiJ3lqgXJzeSinnY9YK7w&usqp=CAU">
+    
+    
+  </div></a>
+  
+    
+  
+    
+    <h1>Meg 2</h1>
+      <div class="meg"><a href="meg 2.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj7cfwZYXV1EA39l3O6u_-Nbu4MRWr-xQlgg&usqp=CAU">
+    
+    
+  </div></a>
+  
+    
+  
+    <h1>Ant man and wasp:The Quantumania</h1><div class="Antman"><a href="Antman.html">
+    <img src="https://upload.wikimedia.org/wikipedia/en/3/30/Ant-Man_and_the_Wasp_Quantumania_poster.jpg">
+    
+    
+  </div></a>
+  
+    
+  
+    <h1>Blue Beetle</h1><div class="bluebeetle"><a href="blue beetle.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR46uDEQ-avEjS2fGNAyT09ZqgNTMussZpkUQ&usqp=CAU">
+    
+    
+  </div></a>
+  
+    <h1>Heart of Stone</h1><div class="heart"><a href="heart of stone.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfu9CgZ8GFuVTnvP-iPZgjjSy0HdO73I6HiQ&usqp=CAU">
+    
+    
+  </div></a>
+  
+    <h1>Spy</h1><div class="spy"><a href="spy.html">
+    <img src="https://m.media-amazon.com/images/M/MV5BMGFlYWIxMTEtMmFhZi00YzlhLTkyYmMtZjJlOGU4MzE4ZDZjXkEyXkFqcGdeQXVyMTU0ODI1NTA2._V1_.jpg">
+    
+    
+  </div></a>
+  
+    <h1>Hidden Strike</h1><div class="hidden"><a href="hidden strike.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkALXJPvNfEUHm8u7-4W34yq3WDvNGigzqDg&usqp=CAU">
+    
+    
+  </div></a>
+  
+    
+  
+    
+    
+  
+    <h1>The last kingdom</h1><div class="thelastkingdom"><a href="the last kingdom.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJLtsRy98suW5e9s2mC8cj06Q75vwvuINj-g&usqp=CAU">
+    
+    
+  </div>
+  
+
+    <h1>Bhoola</h1><div class="bhoola"><a href="bhoola.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEfGKI1Ryb3O7K1c2YiucyGK4W0O1oD0mVHw&usqp=CAU">
+    
+    
+  </div></a>
+  
+    <h1>Ram Setu</h1><div class="ramsetu"><a href="ram setu.html">
+    <img src="https://upload.wikimedia.org/wikipedia/en/b/b6/Ram-Setu.jpeg">
+    
+    
+  </div></a>
+  
+
+  
+    <h1>Operation Fortune:Ruse de guerre</h1><div class="operation"><a href="operation.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaZu9_p80IBBghqqAqIECuaYn384D9_2v0PA&usqp=CAU">
+    
+    
+  </div></a>
+  
+    <h1>A.K.A</h1><div class="aka"><a href="Aka.html">
+    <img src="https://upload.wikimedia.org/wikipedia/en/f/fe/French_Poster_of_AKA_%282023_movie%29.jpg">
+    
+    
+  </div></a>
+  
+  
+    
+  
+    <h1>The collective</h1><div class="collective"><a href="the collective.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRg5wvjP2pNPLrmt86p8VR0hDBT_2cDdJ3WjQ&usqp=CAU">
+    
+    
+  </div></a>
+  
+    <h1>The mother</h1><div class="themother"><a href="the mother.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpZwlRuBmhp_6AybUg8EyQjPgyapC7r8JD7w&usqp=CAU">
+    
+    
+  </div></a>
+  
+    <h1>The outlaws</h1><div class="theoutlaws"><a href="the outlaws.html">
+    <img src="https://m.media-amazon.com/images/M/MV5BNjY0ZjU4MGEtZWQzYS00Njc4LTkwODUtY2MwYTMzNDMyOTQ4XkEyXkFqcGdeQXVyMTQ4NTgxNzYx._V1_.jpg">
+    
+    
+  </div></a>
+  
+    <h1>Expand4bles</h1><div class="expandables"><a href="expandables 4.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlSJBqs2l3872MuLVFkXPQHOlX8CG9L27j1A&usqp=CAU">
+  </div></a>
+  
+    <h1>Mission Impossible:Dead Reckoning</h1><div class="mission"><a href="mission impossible.html">
+    <img src="https://upload.wikimedia.org/wikipedia/en/e/ed/Mission-_Impossible_%E2%80%93_Dead_Reckoning_Part_One_poster.jpg">
+    
+    
+  </div>
+  
+    <h1>65</h1><div class="sixty"><a href="sixty five.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDCVefx0YkACmyOhYPn_xRJsQu5tJrFhx2fw&usqp=CAU">
+    
+    
+  </div></a>
+  
+    <h1>The haunted mansion</h1><div class="haunted"><a href="the haunted mansion.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOGlwLZ3wW__6a5sTEnBQdrqc6c01hKwLxZg&usqp=CAU">
+    
+    
+  </div></a>
+  
+    <h1>Secret invasion</h1><div class="secret"><a href="secret invasion.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJnvO08cdKRhttSD934GTQEykrzjYMDjdibw&usqp=CAU">
+    
+    
+  </div></a>
+  
+    <h1>Dungeons and Dragons</h1><div class="fastx"><a href="dungeons and Dragons.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP7DvfoYUNO9d7v77R_wYt2VLkzKu6tHaCKQ&usqp=CAU">
+    
+    
+  </div></a>
+  
+    <h1>Fast X</h1><div class="fastx"><a href="fast x.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTITExMVqBCTCAjxS4rbJ7rA6W0FxE17sODWQ&usqp=CAU">
+    
+    
+  </div></a>
+  
+  
+    <h1>Guardian of Galaxy:vol 3</h1><div class="fastx"><a href="guardian of galaxy.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsLyz9F0V21MRdyEbjhAg5Mb16VA-YNI21Og&usqp=CAU">
+    
+    </div></a>
+  
+  <h1>Transformer:Rise of the Beast</h1><div class="fastx"><a href="transformer.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGzPrJsmJoK9yq0s6l1CQIX7P0q6V3g0zJ6A&usqp=CAU">
+    
+    
+  </div></a>
+  
+    <h1>Shazam:Fury of the gods
+    </h1><div class="fastx"><a href="shazam.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_2gLoYPGQczx2roz-kun278uonHhJ262DDw&usqp=CAU">
+    
+    
+  </div></a>
+  
+      
+    <h1>The flash</h1><div class="fastx"><a href="the flash.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRpwOPNYtYwk36ntO1Q57erH49uH2y4aJDvQ&usqp=CAU">
+    
+    
+  </div></a>
+  
+    <h1>Avatar:The way of water</h1><div class="fastx"><a href="avatar.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTR2LI0vvoUv6ZulAZ1eiu76vz2VTsaRW_7wA&usqp=CAU">
+    
+    
+  </div></a>
+  
+    <h1>Black Adam</h1><div class="fastx"><a href="black adam.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUgw20FY_9YyREjL8qIbAsaRVKnaLWyZWYRQ&usqp=CAU">
+    
+    
+  </div></a>
+  
+    <h1>Black panther:Wakanda forever</h1><div class="fastx"><a href="black panther 2.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeXG0Clx7WrphtXUrvwD4ZUiFceXaC3MS6Dg&usqp=CAU">
+    
+    
+  </div></a>
+  
+    <h1>Woman king</h1><div class="fastx"><a href="woman king.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzzCpUu8unU2UQqEalial8erOTyBzZjBnyHg&usqp=CAU">
+    
+    
+  </div></a>
+  
+    <h1>Prey</h1><div class="fastx"><a href="prey.html">
+    <img src="https://upload.wikimedia.org/wikipedia/en/f/f4/Prey_2022_poster.png">
+    
+    
+  </div></a>
+  
+    <h1>Secret Headquaters</h1><div class="fastx"><a href="secret HQ.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTd2a-BHBFMRk5SgZZGVws_H3ubn4DMXbbBA&usqp=CAU">
+    
+    
+  </div></a>
+  
+    <h1>Doctor strange in the multiverse of madness</h1><div class="fastx"><a href="doctor strange.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSak4NHg8G68jbKS2nOhT__Ag61BI2DUEKEcw&usqp=CAU">
+    
+    
+  </div></a>
+
+  <h1>
+    The Batman
+</h1><div class="fastx"><a href="the Batman.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-SBD0CHsXPnowgPYNOqlZ6Zpq0eN7MgKvvQ&usqp=CAU">
+    
+    
+  </div></a>
+  
+  
+    <h1>The lost city</h1><div class="fastx"><a href="the lost city.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjLL3fbmrK2mbJhrqs25qoE8RzC9m4tmnbMA&usqp=CAU">
+    
+    
+  </div></a>
+  
+    <h1>Jurrasic World Dominion</h1><div class="fastx"><a href="jurrasic.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSThIjReIKNUq524pAV8XmcnxMPZF0vVmCSoQ&usqp=CAU">
+    
+    
+  </div></a>
+  
+    <h1>
+      The northman
+  </h1><div class="fastx"><a href="Northman.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRst9UL4jTGyjiWdx-YqxAomWcFjwi4nG4T4w&usqp=CAU">
+    
+    
+  </div></a>
+      
+    <h1>Uncharted</h1><div class="fastx"><a href="Uncharted.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQS26oZRmodNX0sWxMe1ck4r07KfzDELVZYVA&usqp=CAU">
+    
+    
+  </div></a>
+  
+    <h1>No time to die</h1><div class="fastx"><a href="no time to die.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu5se9QjNOLSkHszDmpBWOy3v-iv18f8N7uA&usqp=CAU">
+    
+    
+  </div></a>
+  
+    <h1>Dune</h1><div class="fastx"><a href="dune.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA3ebbNrUPZUhbR4Bf6vGFBOJc0M_T1G-z_g&usqp=CAU">
+    
+    
+  </div></a>
+  
+    <h1>Free guy
+    </h1><div class="fastx"><a href="free guy.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXQbfMqS1PDMtRUzgTV_0u8OKMcBppMJu64g&usqp=CAU">
+    
+    
+  </div></a>
+  
+    <h1>Jungle cruise</h1><div class="fastx"><a href="jungle cruise.html">
+    <img src="https://lumiere-a.akamaihd.net/v1/images/p_junglecruise_21740_v2_bb7f0ae4.jpeg?region=0%2C0%2C540%2C810">
+    
+    
+  </div></a>
+  
+    <h1>Zack synder justice league</h1><div class="fastx"><a href="justice league.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuSsBp596DlISpC-vUMQ-kKCmhLC66bWqNCQ&usqp=CAU">
+    
+    
+  </div></a>
+  
+    <h1>Avengers:Endgame</h1><div class="fastx"><a href="avengers.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQR1IPdqYerBBz6ps1Kg55RDBpyxoPXApHjGQ&usqp=CAU">
+    
+    
+  </div></a>
+  
+    <h1>Aquaman</h1><div class="fastx"><a href="Aquaman.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROTDem9znrGMRIiGfsfIhiMqFO2IFD1g1iXQ&usqp=CAU">
+    
+    
+  </div></a>
+  
+    <h1>The meg</h1><a href="the meg.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGugyEU0z_25eViR5hbURKni4WCP2KEeqqGA&usqp=CAU"><div class="fastx">
+    
+    
+  </div></a>
+  
+    <h1>Black Panther</h1><div class="fastx"><a href="black panther.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTW6RqvIH1zFvhDigZxB2YkT3gzh-0eRpyCsA&usqp=CAU">
+    
+    
+  </div></a>
+  
+    <h1>The Dark Knight</h1><div class="fastx"><a href="the dark Knight.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcJ4nmjnJZ2MyNeISmtAilLZNsDWfRwHNWdw&usqp=CAU">
+    
+    
+  </div></a>
+  
+    
+    <h1>Predator</h1><div class="fastx"><a href="predator.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVGzkld3JhHRNNC-kiAOotivZFgMv8N-Jokg&usqp=CAU">
+    
+    
+  </div></a>
+  
+    <h1>The Raid</h1><div class="fastx"><a href="the raid.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnpJl7UyJbhEYm9bst7fLQeIGNMaesrKUbMQ&usqp=CAU">
+    
+    
+  </div></a>
+  
+    <h1>Speed</h1><div class="fastx"><a href="speed.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlMbG5dzeI5JYRT1jzk1haf25I6wqNSWshug&usqp=CAU">
+    
+    
+  </div></a>
+<style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    footer {
+      background-color: #333;
+      color: #fff;
+      padding: 20px 0;
+      height: 80%; /* Set the height to 80% */
+      display: flexbox; /* Set display to block */
+      text-align:center;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    #netdotText {
+      display: inline; /* Set display to inline */
+      margin-right: 10px; /* Add margin for spacing */
+      color: red;
+      font-size: 100px;
+      font-weight: bold;
+      font-family:fantasy;
+    }
+
+    .footer-left, .footer-center, .footer-right {
+      width: 30%; /* Adjust the width as needed */
+      display: inline-block; /* Set display to inline-block */
+      vertical-align: top; /* Align to the top of the container */
+    }
+
+    .footer-left h3, .footer-center h3, .footer-right h3 {
+      border-bottom: 1px solid #fff;
+      padding-bottom: 10px;
+    }
+
+    .footer-right a, .footer-center a {
+      display: block;
+      margin-top: 8px;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 20px;
+      color: #fff;
+    }
+
+    .footer-bottom p {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Your website content goes here -->
+
+  <footer>
+    <div class="footer-container">
+     <p id="netdotText">NETDOT</p>
+      
+        <h3>Contact Us</h3>
+        <p>Email: Netdot11@gmail.com</p>
+        <p>Phone: +234 912 140 8611</p>
+      </div>
+      <div class="footer-center">
+        <h3>Quick Links</h3>
+        <a href="index.html">Home</a>
+        <a href="movies.html">Movies</a>
+        <a href="Music.html">Music</a>
+        <a href="News.html">News</a>
+      </div>
+      <div class="footer-right">
+        <h3>Follow Us</h3>
+        <a href="https://www.facebook.com/profile.php?id=61552159980507" target="_blank">Facebook</a>
+        <a href=" " target="_blank">Twitter</a>
+        <a href="https://whatsapp.com/channel/0029VaBPCnh7j6g7BgEsI01B" target="_blank">Whatsapp</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="currentYear"></span> Netdot. All rights reserved.</p>
+      <p><a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a></p>
+    </div>
+
+    <script>
+      // Get the current year
+      const currentYear = new Date().getFullYear();
+
+      // Update the footer text with the current year
+      document.addEventListener('DOMContentLoaded', function () {
+        const yearElement = document.getElementById('currentYear');
+        if (yearElement) {
+          yearElement.textContent = currentYear;
+        }
+
+        // Toggle "Netdot" visibility every 1 second
+        setInterval(() => {
+          const netdotElement = document.getElementById('netdotText');
+          if (netdotElement) {
+            netdotElement.style.visibility = (netdotElement.style.visibility === 'visible') ? 'hidden' : 'visible';
+          }
+        }, 1000); // 1000 milliseconds = 1 second
+      });
+    </script>
+  </footer>
